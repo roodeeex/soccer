@@ -11,6 +11,7 @@ import { BookingFlow } from "@/components/booking-flow"
 import { RankedPlayersDialog } from "@/components/ranked-players-dialog"
 import { LoadingSpinner } from "@/components/loading-spinner"
 import { startOfWeek, endOfWeek, format } from "date-fns"
+import { getSession } from "@/app/actions/auth"
 
 export default function AdminDashboard() {
   const [user, setUser] = useState(null)
@@ -24,19 +25,15 @@ export default function AdminDashboard() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const {
-          data: { user },
-          error,
-        } = await supabase.auth.getUser()
+        const session = await getSession()
 
-        if (error || !user) {
-          console.log("No authenticated user found or error occurred, redirecting to login page")
-          console.error("Auth error:", error)
+        if (!session) {
+          console.log("No authenticated session found, redirecting to login page")
           router.push("/admin")
           return
         }
 
-        setUser(user)
+        setUser(session.user)
 
         const { data: bookingsData, error: bookingsError } = await supabase
           .from("bookings")
