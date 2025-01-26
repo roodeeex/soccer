@@ -1,18 +1,13 @@
-const colors = {
-  primary: {
-    DEFAULT: "#FF3B30",
-    foreground: "hsl(var(--primary-foreground))",
-  },
-  secondary: {
-    DEFAULT: "#18181B",
-    foreground: "hsl(var(--secondary-foreground))",
-  },
-}
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "./@/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -28,7 +23,14 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        ...colors,
+        primary: {
+          DEFAULT: "#FF3B30",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "#18181B",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
